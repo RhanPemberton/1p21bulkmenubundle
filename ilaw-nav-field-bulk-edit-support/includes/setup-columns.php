@@ -22,8 +22,11 @@ add_filter('acf_quick_edit_fields_types',function($types){
 add_filter('acf_qef_column_html_nav_menu',function( $html, $object_id, $acf_field ) {
 	$ilaw_set_menu = wp_get_nav_menu_object(get_field( $acf_field['key'], $object_id, false ));
 
+	if($ilaw_set_menu) {
 
-    return '<p>' .  $ilaw_set_menu->name  . '</p>';
+		return '<p>' .  $ilaw_set_menu->name  . '</p>';
+	}
+
 
 }, 10, 3 );
 

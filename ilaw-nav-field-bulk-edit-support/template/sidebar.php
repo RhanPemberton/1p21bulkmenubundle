@@ -1,21 +1,24 @@
 
 <?php
 
+// Check for blog first
 if( is_home() || is_single() || is_archive() ) { 
 	dynamic_sidebar( '_1p21_sm_blog_sidebar' );
+
+//check for page's own custom sidebar menu first
 }else if ( get_field('sidebar_menu') ){ //use same classes as widgets ?>
-	<!-- custom -->
+
 	<?php
-	
-	 
 	$_1p21_sm_widget_class = get_field('_1p21_sm_widget_class','option');
 	$_1p21_sm_title_class = get_field('_1p21_sm_widget_class','option');
 	$_1p21_sm_title_tag = (get_field('_1p21_sm_title_tag','option')) ? get_field('_1p21_sm_title_tag','option') : 'h3';
 	?>
+
+	<!-- custom -->
 	<div class="widget acf-custom-menu <?=$_1p21_sm_widget_class; ?>">
 		<<?=$_1p21_sm_title_tag; ?> class="widget-title <?=$_1p21_sm_title_class; ?>">
-			<?php if(get_field('sidebar_menu_title')){
-				the_field('sidebar_menu_title');
+			<?php if(get_field('_1p21_sm_title')){
+				the_field('_1p21_sm_title');
 			}else{
 				echo 'Practice Areas';
 			} ?>
@@ -23,7 +26,7 @@ if( is_home() || is_single() || is_archive() ) {
 
 		<?php
 			wp_nav_menu(array(
-				'menu' => get_field('sidebar_menu'),
+				'menu' => get_field('_1p21_sm_menu'),
 				'container' => 'ul',
 				'depth' => 2
 			));
@@ -31,10 +34,12 @@ if( is_home() || is_single() || is_archive() ) {
 	</div>
 	<?php
 }else {
-	if(have_rows('sidebars','option')){
+
+	//check if ancestor has a set subdirectory menu
+	if(have_rows('_1p21_sm_sidebars','option')){
 		$no_sidebar_yet = true;
 
-		while(have_rows('sidebars','option')): the_row();
+		while(have_rows('_1p21_sm_sidebars','option')): the_row();
 			if(get_sub_field('page') && _1p21_sm_is_descendant_of(get_sub_field('page')) &&  $no_sidebar_yet){
 				
 				echo '<!-- ancestor default -->';
