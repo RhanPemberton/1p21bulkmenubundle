@@ -33,7 +33,7 @@ $_ilaw_sm_opts_fields = array(
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
-				'width' => '33.33',
+				'width' => '',
 				'class' => '',
 				'id' => '',
 			),
@@ -57,7 +57,7 @@ $_ilaw_sm_opts_fields = array(
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
-				'width' => '33.33',
+				'width' => '',
 				'class' => '',
 				'id' => '',
 			),
@@ -81,7 +81,7 @@ $_ilaw_sm_opts_fields = array(
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
-				'width' => '33.33',
+				'width' => '',
 				'class' => '',
 				'id' => '',
 			),
@@ -105,7 +105,7 @@ $_ilaw_sm_opts_fields = array(
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
-				'width' => '33.33',
+				'width' => '',
 				'class' => '',
 				'id' => '',
 			),
@@ -124,7 +124,7 @@ $_ilaw_sm_opts_fields = array(
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
-				'width' => '33.33',
+				'width' => '',
 				'class' => '',
 				'id' => '',
 			),
@@ -297,7 +297,7 @@ $_ilaw_sm_page_fields = array(
 			'name' => 'sm_custom_menu',
 			'type' => 'nav_menu',
 			'instructions' => 'Select sidebar menu.',
-			'required' => 1,
+			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
 				'width' => '',
@@ -306,7 +306,7 @@ $_ilaw_sm_page_fields = array(
 			),
 			'save_format' => 'id',
 			'container' => 'div',
-			'allow_null' => 0,
+			'allow_null' => 1,
 			'show_column' => 1,
 			'show_column_weight' => 1000,
 			'allow_quickedit' => 1,

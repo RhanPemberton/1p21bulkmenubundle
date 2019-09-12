@@ -1,72 +1,92 @@
 
 <?php
-
-// Check for blog first
-if( is_home() || is_single() || is_archive() ) { 
-	dynamic_sidebar( 'sm_blog_sidebar' );
-
-//check for page's own custom sidebar menu first
-}else if ( get_field('sm_custom_menu') ){ //use same classes as widgets ?>
+//check for page's own custom sidebar first
+if ( get_field('sm_custom_menu') ){ ?>
 
 	<?php
-	$_ilaw_sm_widget_class = get_field('sm_widget_class','option');
-	$_ilaw_sm_title_class = get_field('sm_widget_class','option');
-	$_ilaw_sm_title_tag = (get_field('sm_title_tag','option')) ? get_field('sm_title_tag','option') : 'h3';
+	$ilaw_sm_widget_class = get_field('sm_widget_class','option');
+	$ilaw_sm_title_class = get_field('sm_widget_class','option');
+	$ilaw_sm_title_tag = (get_field('sm_title_tag','option')) ? get_field('sm_title_tag','option') : 'h3';
 	?>
 
 		<!-- custom sidebar -->
-		<div class="widget acf-custom-menu <?=$_ilaw_sm_widget_class; ?>">
-			<<?=$_ilaw_sm_title_tag; ?> class="widget-title <?=$_ilaw_sm_title_class; ?>">
-				<?php if(get_sub_field('sm_custom_title')){
-					the_sub_field('sm_custom_title');
+		<div class="widget acf-custom-menu <?=$ilaw_sm_widget_class; ?>">
+			
+			<<?=$ilaw_sm_title_tag; ?> class="widget-title <?=$ilaw_sm_title_class; ?>">
+				
+				<?php if(get_field('sm_custom_title')){
+					the_field('sm_custom_title');
 				}else{
 					the_field('sm_default_title','option');
 				} ?>
-			</<?=$_ilaw_sm_title_tag; ?>>
+			
+			</<?=$ilaw_sm_title_tag; ?>>
 
 			<?php
 				wp_nav_menu(array(
-					'menu' => get_sub_field('sm_custom_menu'),
+					'menu' => get_field('sm_custom_menu'),
 					'container' => 'ul',
 					'depth' => get_field('sm_depth','option')
 				));
 			?>
 		</div>
 	<?php
-}else if( have_rows('sm_sidebars','option') ){
+
+//check for subdirectory or ancestral sidebars
+}else if( get_field('sm_sidebars','option') ){
+
+	$ilaw_sm_available_sidebars = get_field('sm_sidebars','option');
 
 	//to check if there was a sidebar for the page from an ancestor
-	$no_sidebar_yet = true;
+	$ilaw_sm_no_sidebar_yet = true;
+	
 
-	while( have_rows('sm_sidebars','option') ): the_row();
+	foreach( $ilaw_sm_available_sidebars as $row ):
 
-	$ilaw_template_sidebar = get_sub_field( 'name' );
+		$ilaw_sm_template_sidebar_id = _ilaw_sm_id_friendly_text($row['name']);
 
-		if(have_rows('pages')): 
-			while(have_rows('pages')):
+		if($row['pages']): 
+			foreach($row['pages'] as $sub_row):
 				the_row();
 
-				if( get_sub_field('page') && is_descendant_of(get_sub_field('page')) &&  $no_sidebar_yet ){
-					echo '<!-- ancestor default: '.$ilaw_template_sidebar.' -->';
-					echo ilaw_id_friendly_text( $ilaw_template_sidebar );
-					dynamic_sidebar( ilaw_id_friendly_text( $ilaw_template_sidebar ) );
-					$no_sidebar_yet = false;
+				if( $sub_row['page'] && is_descendant_of($sub_row['page']) &&  $ilaw_sm_no_sidebar_yet ){
+
+					echo '<!-- ancestor default: '.$ilaw_sm_template_sidebar_id.' -->';
+					dynamic_sidebar( $ilaw_sm_template_sidebar_id );
+
+					$ilaw_sm_no_sidebar_yet = false;
+
 					break;
 				}
-			endwhile;
+			endforeach;
 		endif;
-	endwhile;
+	endforeach;
 	
 
 	
 	// if it didnt  get any ancestral sidebars just put the defaul boi
-	if($no_sidebar_yet){
-		echo '<!-- no ancestral default sidebar -->';
-		dynamic_sidebar( 'sm_default_sidebar' );
-		// break;
+	if($ilaw_sm_no_sidebar_yet){
+
+		if( is_active_sidebar( '_ilaw_sm_default_sidebar' ) ){
+			echo '<!-- no ancestral default sidebar -->';
+			dynamic_sidebar( '_ilaw_sm_default_sidebar' );
+		}
+
 	}
 
+//then check for blog first
+}else if( is_home() || is_single() || is_archive() ) { 
+
+	if( is_active_sidebar( '_ilaw_sm_blog_sidebar' ) ){
+		echo '<!-- blog sidebar -->';
+		dynamic_sidebar( '_ilaw_sm_blog_sidebar' );
+	}
+
+//default boiii
 }else{
-	echo '<!--  default sidebar -->';
-	dynamic_sidebar( 'sm_default_sidebar' );
+	
+	if( is_active_sidebar( '_ilaw_sm_default_sidebar' ) ){
+		echo '<!--  default sidebar -->';
+		dynamic_sidebar( '_ilaw_sm_default_sidebar' );
+	}
 }

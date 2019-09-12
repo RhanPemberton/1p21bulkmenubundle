@@ -47,7 +47,7 @@
                 "value": null,
                 "menu_order": 1,
                 "instructions": "Select sidebar menu.",
-                "required": 1,
+                "required": 0,
                 "id": "",
                 "class": "",
                 "conditional_logic": 0,
@@ -62,7 +62,7 @@
                 "_valid": 1,
                 "save_format": "id",
                 "container": "div",
-                "allow_null": 0,
+                "allow_null": 1,
                 "show_column": 1,
                 "show_column_weight": 1000,
                 "allow_quickedit": 1,
@@ -135,7 +135,7 @@
                 "conditional_logic": 0,
                 "parent": "group_9999999999999",
                 "wrapper": {
-                    "width": "33.33",
+                    "width": "",
                     "class": "",
                     "id": ""
                 },
@@ -169,7 +169,7 @@
                 "conditional_logic": 0,
                 "parent": "group_9999999999999",
                 "wrapper": {
-                    "width": "33.33",
+                    "width": "",
                     "class": "",
                     "id": ""
                 },
@@ -203,7 +203,7 @@
                 "conditional_logic": 0,
                 "parent": "group_9999999999999",
                 "wrapper": {
-                    "width": "33.33",
+                    "width": "",
                     "class": "",
                     "id": ""
                 },
@@ -237,7 +237,7 @@
                 "conditional_logic": 0,
                 "parent": "group_9999999999999",
                 "wrapper": {
-                    "width": "33.33",
+                    "width": "",
                     "class": "",
                     "id": ""
                 },
@@ -266,7 +266,7 @@
                 "conditional_logic": 0,
                 "parent": "group_9999999999999",
                 "wrapper": {
-                    "width": "33.33",
+                    "width": "",
                     "class": "",
                     "id": ""
                 },
