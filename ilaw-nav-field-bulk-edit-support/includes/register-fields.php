@@ -18,13 +18,13 @@ function _ilaw_sm_load_acf(){
 		$json_mod = filemtime(_ILAW_SM_PLUGIN_PATH . '/fields/acf-sm-fields.json');
 
 		
+		//update json on changes for ability to edit
 		if(
 			($fields_mod > $json_mod)
 			and function_exists('acf_get_local_fields')
 			and is_admin()
 		){
 
-			//update json on changes
 			$groups = acf_get_local_field_groups(
 				array(
 					$_ilaw_sm_page_fields['key'],

@@ -13,14 +13,14 @@
 ## How to install
 
 1.	Install this boi
-2.	Open theme template(s) in a text editor and replace `get_sidebar()` with `get_bulk_sidebar()`
+2.	Open theme template(s) in a text editor and replace `get_sidebar()` with `get_bulk_sidebar()`. This will replace the set sidebar.php template
 
 
 ## Render sidebar
 
 To generate sidebar call on the function `get_bulk_sidebar()`
 
-This function calls on a template that goes through all possible sidebars
+This function calls on a template that goes through all possible sidebars implemented through this plugin
 	
 Example:
 
@@ -29,6 +29,9 @@ Example:
 	<?php get_bulk_sidebar(); ?>
 </aside>
 ```
+
+In case the sidebar needs to be customized, the function also calls on a boiler template: [template/sidebar.php](template/sidebar.php). 
+In case the output needs to be customized, this can be copied to your theme instead of using the function
 
 # Version Updates
 *	2.0.0 	- easier set up and stuff
