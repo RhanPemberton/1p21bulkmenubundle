@@ -30,7 +30,7 @@ Example:
 </aside>
 ```
 
-In case the sidebar needs to be customized, the function also calls on a boiler template: [template/sidebar.php](template/sidebar.php). 
+In case the sidebar needs to be customized, the function also calls on a boiler template: [ilaw-nav-field-bulk-edit-support/template/sidebar.php](ilaw-nav-field-bulk-edit-support/template/sidebar.php). 
 In case the output needs to be customized, this can be copied to your theme instead of using the function
 
 # Version Updates
