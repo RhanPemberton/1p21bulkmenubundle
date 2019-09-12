@@ -28,7 +28,7 @@ if( is_home() || is_single() || is_archive() ) {
 				wp_nav_menu(array(
 					'menu' => get_sub_field('sm_custom_menu'),
 					'container' => 'ul',
-					'depth' => the_field('sm_depth','option')
+					'depth' => get_field('sm_depth','option')
 				));
 			?>
 		</div>

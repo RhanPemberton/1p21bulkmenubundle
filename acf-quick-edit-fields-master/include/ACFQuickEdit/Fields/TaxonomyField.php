@@ -14,20 +14,32 @@ class TaxonomyField extends Field {
 		/*
 		$value = get_field( $this->acf_field['key'], $object_id );
 		/*/
-		$value = $this->get_value( $object_id );
+		$value = $this->get_value( $object_id, false );
+
 		//*/
 		$output = '';
 		if ( $value ) {
 			$term_names = array();
-			foreach ( (array) $value as $i => $term ) {
-				if ( $this->acf_field['return_format'] === 'id' ) {
-					$term = get_term($term, $this->acf_field['taxonomy']);
-				}
-				$term_names[] = $term->name;
+			if ( ! is_array( $value ) ) {
+				$value = array( $value );
 			}
+			foreach ( $value as $i => $term ) {
+				if ( $this->acf_field['return_format'] === 'id' ) {
+					$term = get_term( $term, $this->acf_field['taxonomy'] );
+				}
+				// fix #63 ?
+				if ( trim( $term->name ) !== '' ) {
+					$term_names[] = $term->name;
+				} else if ( trim( $term->slug ) !== '' ) {
+					$term_names[] = $term->slug;
+				} else {
+					$term_names[] = $term->id;
+				}
+			}
+			$term_names = array_map( 'esc_html', $term_names );
 			$output .= implode( ', ', $term_names );
 		} else {
-			$output .= __('(No value)', 'acf-quick-edit-fields');
+			$output .= esc_html__('(No value)', 'acf-quickedit-fields');
 		}
 		return $output;
 	}
@@ -83,11 +95,11 @@ class TaxonomyField extends Field {
 					'value'	=> '',
 					'type'	=> $field_clone['field_type']
 				)) . ' />';
-				$output .= sprintf('<span>%s</span>',__('– No Selection –','acf-quick-edit-fields'));
+				$output .= sprintf('<span>%s</span>', esc_html__('– No Selection –','acf-quickedit-fields'));
 				$output .= '</label>';
 				$output .= '</li>';
 			}
-			$output .= wp_list_categories($args);
+			$output .= wp_list_categories( $args );
 
 			$output .= '</ul>';
 		} else {
@@ -99,7 +111,7 @@ class TaxonomyField extends Field {
 			$field_clone['ajax']		= false;
 
 			if ( $field_clone['allow_null'] ) {
-				$field_clone['choices'][''] = __('– No Selection –','acf-quick-edit-fields');
+				$field_clone['choices'][''] = __('– No Selection –','acf-quickedit-fields');
 			}
 
 			$terms = acf_get_terms( array(
@@ -121,7 +133,7 @@ class TaxonomyField extends Field {
 
 				$term_title .= $term->name;
 
-				$field_clone['choices'][ $term->term_id ] = $term_title;
+				$field_clone['choices'][ $term->term_id ] = esc_html( $term_title );
 			}
 			ob_start();
 			acf_render_field($field_clone);
@@ -131,5 +143,16 @@ class TaxonomyField extends Field {
 		return $output;
 	}
 
+	/**
+	 *	@param mixed $value
+	 */
+	public function sanitize_value( $value, $context = 'db' ) {
+		if ( is_array( $value ) ) {
+			$value = array_map( 'intval', $value );
+			$value = array_filter( $value );
+			return array_values( $value );
+		}
+		return sanitize_text_field($value);
+	}
 
 }

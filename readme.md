@@ -30,26 +30,7 @@ Example:
 </aside>
 ```
 
+# Version Updates
 
-# NOTES FOR DEV
-
-## Plugin URL sources for updates:
-
-*	ilaw-nav-field-bulk-edit-support: https://github.com/samzabala/1p21bulkmenubundle/tree/master/ilaw-nav-field-bulk-edit-support
-*	advanced-custom-fields-nav-menu-field: https://wordpress.org/plugins/advanced-custom-fields-nav-menu-field/
-*	acf-quick-edit-fields-master: https://github.com/mcguffin/acf-quick-edit-fields
-
-## How to update plugin:
-
-1.	Download directories from the download source urls above.
-2.	Make sure the updated directory names matches the existing ones
-3.	Replace the existing directories within this bundle plugin's directory with the updated ones.
-4.	Remove Plugin header comments on each referenced files in index.php so it doesnt break the site
-5.	Update repo because duh
-
-
-## How to update acf fields:
-
-Too complicated. need a flowchart
-
-
+*	1.0.1 - update acf-quickedit-fields
+*	1.0.0 - it born

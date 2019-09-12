@@ -1,6 +1,8 @@
 <?php
 
 namespace ACFQuickEdit\Fields;
+
+use ACFQuickEdit\Admin;
 use ACFQuickEdit\Core;
 
 if ( ! defined( 'ABSPATH' ) )
@@ -33,11 +35,6 @@ abstract class Field {
 	 *	@var array ACFQuickEdit\Fields\Field
 	 */
 	protected $parent;
-
-	/**
-	 *	@var string value for the do-not-change checkbox in bulk edit
-	 */
-	protected $dont_change_value = '___do_not_change';
 
 	/**
 	 *	@var string classname to be wrapped aroud input element
@@ -75,9 +72,14 @@ abstract class Field {
 			// relational
 			'post_object'		=> array( 'column' => true,		'quickedit' => false,	'bulkedit' => false ),
 			'page_link'			=> array( 'column' => true,		'quickedit' => false,	'bulkedit' => false ),
+			'link'				=> array( 'column' => true,		'quickedit' => true,	'bulkedit' => true ),
 			'relationship'		=> array( 'column' => true,		'quickedit' => false,	'bulkedit' => false ),
 			'taxonomy'			=> array( 'column' => true,		'quickedit' => true,	'bulkedit' => true ),
-			'user'				=> array( 'column' => false,	'quickedit' => false,	'bulkedit' => false ),
+			'user'				=> array(
+				'column'	=> current_user_can('list_users'),
+				'quickedit'	=> false,
+				'bulkedit'	=> false
+			),
 
 			// jQuery
 			'google_map'		=> array( 'column' => false,	'quickedit' => false,	'bulkedit' => false ),
@@ -213,7 +215,7 @@ abstract class Field {
 			return;
 		}
 		$wrapper_attr = array(
-			'class'				=> 'acf-field inline-edit-col',
+			'class'				=> 'acf-field',
 			'data-key' 			=> $this->acf_field['key'],
 			'data-parent-key'	=> isset( $this->parent ) ? $this->parent->get_acf_field()['key'] : 'false',
 			'data-field-type'	=> $this->acf_field['type'],
@@ -222,22 +224,26 @@ abstract class Field {
 		if ( isset( $this->acf_field['field_type'] ) ) {
 			$wrapper_attr['data-field-sub-type'] = $this->acf_field['field_type'];
 		}
+
+		$wrapper_class = explode( ' ', $this->wrapper_class );
+		$wrapper_class = array_map( 'sanitize_html_class', $wrapper_class );
 		?>
 			<div <?php echo acf_esc_attr( $wrapper_attr ) ?>>
-				<label class="inline-edit-group">
-					<span class="title"><?php echo $this->acf_field['label']; ?></span>
-					<?php if ( $mode === 'bulk' ) {
-						$this->render_bulk_do_not_change( $input_atts );
-					} ?>
-					<span class="<?php echo $this->wrapper_class ?>">
+				<div class="inline-edit-group">
+					<label for="<?php echo $this->get_input_id( $mode === 'quick' ) ?>" class="title"><?php esc_html_e( $this->acf_field['label'] ); ?></label>
+					<span class="<?php echo implode(' ',$wrapper_class )  ?>">
 						<?php
 
 							do_action( 'acf_quick_edit_field_' . $this->acf_field['type'], $this->acf_field, $post_type  );
+							// sanitiation happens in render_input()
 							echo $this->render_input( $input_atts, $mode === 'quick' );
 
 						?>
 					</span>
-				</label>
+					<?php if ( $mode === 'bulk' ) {
+						$this->render_bulk_do_not_change( $input_atts );
+					} ?>
+				</div>
 			</div>
 		<?php
 
@@ -249,17 +255,18 @@ abstract class Field {
 	 *	@param array $input_atts Field input attributes
 	 */
 	protected function render_bulk_do_not_change( $input_atts ) {
+		$bulk = Admin\Bulkedit::instance();
 		?>
-		<span>
+		<label class="bulk-do-not-change">
 			<input <?php echo acf_esc_attr( array(
 				'name'		=> $input_atts['name'],
-				'value' 	=> $this->dont_change_value,
+				'value' 	=> $bulk->get_dont_change_value(),
 				'type'		=> 'checkbox',
 				'checked'	=> 'checked',
-				'data-is-do-not-change' => 'true',
+				'data-is-do-not-change' => 'true'
 			) ) ?> />
 			<?php _e( 'Do not change', 'acf-quickedit-fields' ) ?>
-		</span>
+		</label>
 		<?php
 	}
 
@@ -278,6 +285,7 @@ abstract class Field {
 			'type'					=> 'text',
 			'data-acf-field-key'	=> $this->acf_field['key'],
 			'name'					=> $this->get_input_name(),
+			'id'					=> $this->get_input_id( $is_quickedit ),
 		);
 
 		return '<input '. acf_esc_attr( $input_atts ) .' />';
@@ -295,26 +303,40 @@ abstract class Field {
 		return $input_name;
 	}
 
+	/**
+	 *	@return	string
+	 */
+	protected function get_input_id( $is_quickedit = true ) {
+		return sanitize_key( $this->get_input_name() ) . ( $is_quickedit ? '-q' : '-b' );
+	}
+
+	/**
+	 *	@return string The Meta key
+	 */
+	final public function get_meta_key() {
+		if ( isset( $this->parent ) ) {
+			$name = $this->parent->get_meta_key() . '_' . $this->acf_field['name'];
+		} else {
+			$name = $this->acf_field['name'];
+		}
+		return $name;
+	}
 
 	/**
 	 *	@return mixed value of acf field
 	 */
 	public function get_value( $object_id, $format_value = true ) {
 
-		$dummy_field = $this->acf_field + array();
-
-		if ( isset( $this->parent ) ) {
-
-			$dummy_field['name'] = $this->parent->get_acf_field()['name'] . '_' . $dummy_field['name'];
-
-		}
+		$dummy_field = array( 'name' => $this->get_meta_key() ) + $this->acf_field;
 
 		$value = acf_get_value( $object_id, $dummy_field );
 
 		if ( $format_value ) {
-
+			// sanitation don in acf_format_value
 			$value = acf_format_value( $value, $object_id, $dummy_field );
 
+		} else {
+			$value = $this->sanitize_value( $value );
 		}
 
 		return $value;
@@ -322,57 +344,37 @@ abstract class Field {
 //		return get_field( $this->acf_field['key'], $post_id, false );
 	}
 
-	/**
-	 *	Update field value if all conditions are met
-	 *
-	 *	@param int $post_id
-	 *
-	 *	@return null
-	 */
-	public function maybe_update( $post_id , $is_quickedit) {
-
-		if ( $is_quickedit && $this->did_update === true ) {
-			return;
-		}
-
-		if ( isset( $this->parent ) ) {
-			return;
-		}
-
-		if ( ! isset( $_REQUEST['acf'] ) ) {
-			return;
-		}
-
-		$param_name = $this->acf_field['key'];
-
-		if ( isset ( $_REQUEST['acf'][ $param_name ] ) ) {
-			$value = $_REQUEST['acf'][ $param_name ];
-		} else {
-			$value = null;
-		}
-
-		if ( in_array( $this->dont_change_value, (array) $value ) ) {
-			return;
-		}
-
-		// validate field value
-		if ( ! acf_validate_value( $value, $this->acf_field, sprintf( 'acf[%s]', $param_name ) ) ) {
-			return;
-		}
-
-		$this->update( $value, $post_id );
-	}
 
 	/**
-	 *	Update field value
+	 *	Sanitize field value before it is written into db
 	 *
 	 *	@param mixed $value
-	 *	@param int/string $post_id
-	 *
-	 *	@return null
+	 *	@param string $context Sanitation context. Defaut 'db'
+	 *	@return mixed Sanitized $value
 	 */
-	public function update( $value, $post_id ) {
-		$this->did_update = true;
-		update_field( $this->acf_field['key'], $value, $post_id );
+	public function sanitize_value( $value, $context = 'db' ) {
+		return sanitize_text_field( $value );
 	}
+
+	/**
+	 *	Sanitize array keys and values
+	 *
+	 *	@param array $arr
+	 */
+	protected function sanitize_strings_array( $arr ) {
+		$arr = $arr;
+		array_walk( $arr, array( $this, '_sanitize_strings_array_cb' ) );
+		return $arr;
+	}
+
+	/**
+	 *	array_walk callback
+	 */
+	private function _sanitize_strings_array_cb( &$value, &$key ) {
+		if ( ! is_int( $key ) ) {
+			$key = sanitize_text_field( $key );
+		}
+		$value = sanitize_text_field( $value );
+	}
+
 }
