@@ -31,6 +31,6 @@ Example:
 ```
 
 # Version Updates
-
-*	1.0.1 - update acf-quickedit-fields
-*	1.0.0 - it born
+*	2.0.0 	- easier set up and stuff
+*	1.0.1 	- update acf-quickedit-fields
+*	1.0.0 	- it born
