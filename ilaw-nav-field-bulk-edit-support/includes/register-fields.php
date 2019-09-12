@@ -3,28 +3,23 @@
 * setup acf fields
 *********************************************************************************************/
 
-function _1p21_sm_load_acf(){
+function _ilaw_sm_load_acf(){
 	if(function_exists('acf_add_local_field_group')){
 		//register them
-		require _1P21_SM_PLUGIN_PATH . '/fields/page-fields.php';
-		acf_add_local_field_group($_1p21_sm_page_fields);
+		require _ILAW_SM_PLUGIN_PATH . '/fields/fields.php';
 
-
-		require _1P21_SM_PLUGIN_PATH . '/fields/opts-fields.php';
-		acf_add_local_field_group($_1p21_sm_opts_fields);
+		acf_add_local_field_group($_ilaw_sm_page_fields);
+		acf_add_local_field_group($_ilaw_sm_opts_fields);
 
 
 		//update json for debug or update via import
 
-		$fields_opts_mod = filemtime(_1P21_SM_PLUGIN_PATH . '/fields/opts-fields.php');
-		$fields_page_mod = filemtime(_1P21_SM_PLUGIN_PATH . '/fields/page-fields.php');
-		$json_mod = filemtime(_1P21_SM_PLUGIN_PATH . '/fields/acf-sm-fields.json');
+		$fields_mod = filemtime(_ILAW_SM_PLUGIN_PATH . '/fields/fields.php');
+		$json_mod = filemtime(_ILAW_SM_PLUGIN_PATH . '/fields/acf-sm-fields.json');
 
 		
-		if( (
-				($fields_opts_mod > $json_mod)
-				|| ($fields_page_mod > $json_mod)
-			)
+		if(
+			($fields_mod > $json_mod)
 			and function_exists('acf_get_local_fields')
 			and is_admin()
 		){
@@ -32,8 +27,8 @@ function _1p21_sm_load_acf(){
 			//update json on changes
 			$groups = acf_get_local_field_groups(
 				array(
-					$_1p21_sm_page_fields['key'],
-					$_1p21_sm_opts_fields['key']
+					$_ilaw_sm_page_fields['key'],
+					$_ilaw_sm_opts_fields['key']
 				)
 			); //taken from files mentioned above
 
@@ -58,16 +53,16 @@ function _1p21_sm_load_acf(){
 			// Write output to file for easy import into ACF.
 			// The file must be writable by the server process. In this case, the file is located in
 			// the current theme directory.
-			$file =  _1P21_SM_PLUGIN_PATH . 'fields/acf-sm-fields.json';
+			$file =  _ILAW_SM_PLUGIN_PATH . 'fields/acf-sm-fields.json';
 			file_put_contents($file, $json );
 		}
 	}
 }
-add_action('acf/init', '_1p21_sm_load_acf');
+add_action('acf/init', '_ilaw_sm_load_acf');
 
 
 //sidebar name validation
-function _1p21_sm_validate_sidebar_name( $valid, $value, $field, $input ) {
+function _ilaw_sm_validate_sidebar_name( $valid, $value, $field, $input ) {
 	// bail early if value is already invalid
 	if( !$valid ) {
 		return $valid;
@@ -125,18 +120,18 @@ function _1p21_sm_validate_sidebar_name( $valid, $value, $field, $input ) {
 	// return
 	return $valid;
 }
-add_filter('acf/validate_value/key=field_5cc0984cf5836', '_1p21_sm_validate_sidebar_name', 20, 4);
+add_filter('acf/validate_value/key=field_5cc0984cf5836', '_ilaw_sm_validate_sidebar_name', 20, 4);
 
 
 if( function_exists('acf_add_options_page') ) {
  
 	acf_add_options_page(array(
-	  'page_title' 	=> 'Global Sidebars',
-	  'menu_title'	=> 'Global Sidebars',
-	  'menu_slug' 	=> 'sidebar-options',
+	  'page_title' 	=> 'iLawyer Global Sidebars',
+	  'menu_title'	=> 'iLawyer Global Sidebars',
+	  'menu_slug' 	=> 'ilaw-sidebar-options',
 	  'capability'	=> 'edit_posts',
-	  'redirect'		=> false,
-	  'icon_url'	=> ''
+	  'redirect'	=> false,
+	  'icon_url'	=> 'dashicons-menu-alt'
 	));
   
   }

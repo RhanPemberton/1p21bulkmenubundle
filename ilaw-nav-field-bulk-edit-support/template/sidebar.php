@@ -3,74 +3,70 @@
 
 // Check for blog first
 if( is_home() || is_single() || is_archive() ) { 
-	dynamic_sidebar( '_1p21_sm_blog_sidebar' );
+	dynamic_sidebar( 'sm_blog_sidebar' );
 
 //check for page's own custom sidebar menu first
-}else if ( get_field('sidebar_menu') ){ //use same classes as widgets ?>
+}else if ( get_field('sm_custom_menu') ){ //use same classes as widgets ?>
 
 	<?php
-	$_1p21_sm_widget_class = get_field('_1p21_sm_widget_class','option');
-	$_1p21_sm_title_class = get_field('_1p21_sm_widget_class','option');
-	$_1p21_sm_title_tag = (get_field('_1p21_sm_title_tag','option')) ? get_field('_1p21_sm_title_tag','option') : 'h3';
+	$_ilaw_sm_widget_class = get_field('sm_widget_class','option');
+	$_ilaw_sm_title_class = get_field('sm_widget_class','option');
+	$_ilaw_sm_title_tag = (get_field('sm_title_tag','option')) ? get_field('sm_title_tag','option') : 'h3';
 	?>
 
-	<!-- custom -->
-	<div class="widget acf-custom-menu <?=$_1p21_sm_widget_class; ?>">
-		<<?=$_1p21_sm_title_tag; ?> class="widget-title <?=$_1p21_sm_title_class; ?>">
-			<?php if(get_field('_1p21_sm_title')){
-				the_field('_1p21_sm_title');
-			}else{
-				echo 'Practice Areas';
-			} ?>
-		</<?=$_1p21_sm_title_tag; ?>>
+		<!-- custom sidebar -->
+		<div class="widget acf-custom-menu <?=$_ilaw_sm_widget_class; ?>">
+			<<?=$_ilaw_sm_title_tag; ?> class="widget-title <?=$_ilaw_sm_title_class; ?>">
+				<?php if(get_sub_field('sm_custom_title')){
+					the_sub_field('sm_custom_title');
+				}else{
+					the_field('sm_default_title','option');
+				} ?>
+			</<?=$_ilaw_sm_title_tag; ?>>
 
-		<?php
-			wp_nav_menu(array(
-				'menu' => get_field('_1p21_sm_menu'),
-				'container' => 'ul',
-				'depth' => 2
-			));
-		?>
-	</div>
+			<?php
+				wp_nav_menu(array(
+					'menu' => get_sub_field('sm_custom_menu'),
+					'container' => 'ul',
+					'depth' => the_field('sm_depth','option')
+				));
+			?>
+		</div>
 	<?php
-}else {
+}else if( have_rows('sm_sidebars','option') ){
 
-	//check if ancestor has a set subdirectory menu
-	if(have_rows('_1p21_sm_sidebars','option')){
-		$no_sidebar_yet = true;
+	//to check if there was a sidebar for the page from an ancestor
+	$no_sidebar_yet = true;
 
-		while(have_rows('_1p21_sm_sidebars','option')): the_row();
-			if(get_sub_field('page') && _1p21_sm_is_descendant_of(get_sub_field('page')) &&  $no_sidebar_yet){
-				
-				echo '<!-- ancestor default -->';
-				dynamic_sidebar( _1p21_sm_slug_text( get_sub_field( 'sidebar_name' ) ) );
-				$no_sidebar_yet = false;
-				break;
-			
-			}elseif( have_rows('pages') &&  $no_sidebar_yet) {
-				$ilaw_template_sidebar = get_sub_field( 'sidebar_name' );
-				while( have_rows('pages') ):
-					if(_1p21_sm_is_descendant_of(get_sub_field('page')) && $no_sidebar_yet){
-						echo '<!-- ancestor default : multiple -->';
-						dynamic_sidebar( _1p21_sm_slug_text( $ilaw_template_sidebar ) );
-						$no_sidebar_yet = false;
-						break;
-					}
-				endwhile;
-			}
-		endwhile;
-		
+	while( have_rows('sm_sidebars','option') ): the_row();
 
-		
-		
-		if($no_sidebar_yet){
-			echo '<!-- no ancestral sidebar -->';
-			dynamic_sidebar( '_1p21_sm_default_sidebar' );
-			// break;
-		}
+	$ilaw_template_sidebar = get_sub_field( 'name' );
 
-	}else{
-		echo '<!--  default -->';
-		dynamic_sidebar( '_1p21_sm_default_sidebar' );
+		if(have_rows('pages')): 
+			while(have_rows('pages')):
+				the_row();
+
+				if( get_sub_field('page') && is_descendant_of(get_sub_field('page')) &&  $no_sidebar_yet ){
+					echo '<!-- ancestor default: '.$ilaw_template_sidebar.' -->';
+					echo ilaw_id_friendly_text( $ilaw_template_sidebar );
+					dynamic_sidebar( ilaw_id_friendly_text( $ilaw_template_sidebar ) );
+					$no_sidebar_yet = false;
+					break;
+				}
+			endwhile;
+		endif;
+	endwhile;
+	
+
+	
+	// if it didnt  get any ancestral sidebars just put the defaul boi
+	if($no_sidebar_yet){
+		echo '<!-- no ancestral default sidebar -->';
+		dynamic_sidebar( 'sm_default_sidebar' );
+		// break;
 	}
-};
+
+}else{
+	echo '<!--  default sidebar -->';
+	dynamic_sidebar( 'sm_default_sidebar' );
+}

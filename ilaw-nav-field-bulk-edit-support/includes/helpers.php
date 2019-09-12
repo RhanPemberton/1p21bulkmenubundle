@@ -5,7 +5,7 @@
 
 
 
-function _1p21_sm_create_admin_error($message,$notice_type = 'error'){
+function _ilaw_sm_create_admin_error($message,$notice_type = 'error'){
 		
 	$class = 'notice notice-'.$notice_type;
 	$parsed_message = __( $message );
@@ -13,7 +13,7 @@ function _1p21_sm_create_admin_error($message,$notice_type = 'error'){
 }
 
  
-function _1p21_sm_slug_text($string) {
+function _ilaw_sm_slug_text($string) {
 
 	$new_id = preg_replace("/[^a-zA-Z_]/","",str_replace(array(' ',), '_', $string)); // Replaces spaces in Sidebar Name to dash
 	$new_id = strtolower( $new_id ); // Transforms edited Sidebar Name to lowercase
@@ -24,7 +24,7 @@ function _1p21_sm_slug_text($string) {
 
 
 
-	function _1p21_sm__1p21_sm_is_descendant_of($an_ancestor = null,$an_id = null){
+	function _ilaw_sm__ilaw_sm_is_descendant_of($an_ancestor = null,$an_id = null){
   
 	  if(!$an_ancestor){
 		// no use checking kung wala namang iproprovide na ninuno
@@ -56,5 +56,5 @@ function _1p21_sm_slug_text($string) {
 * open for the pooblic
 *********************************************************************************************/
 function get_bulk_sidebar(){
-		require_once _1P21_SM_PLUGIN_PATH . 'template/sidebar.php';
+		require_once _ILAW_SM_PLUGIN_PATH . 'template/sidebar.php';
 }
