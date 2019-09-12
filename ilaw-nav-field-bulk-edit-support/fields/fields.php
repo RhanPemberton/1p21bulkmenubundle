@@ -265,7 +265,7 @@ $_ilaw_sm_opts_fields = array(
 
 $_ilaw_sm_page_fields = array(
 	'key' => 'group_5c366a793a9df',
-	'title' => 'Page Sidebar',
+	'title' => 'iLawyer Page Sidebar',
 	'fields' => array(
 		array(
 			'key' => 'field_5c36777f31fd1',
