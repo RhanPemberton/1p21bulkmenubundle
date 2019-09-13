@@ -40,7 +40,7 @@ if(!class_exists( 'ACF_Nav_Menu_Field_Plugin' ) ){
 
 }else{
 	add_action('admin_notices',function(){
-		_ilaw_bundle_create_admin_error('iLawyer bundle plugin is activated but ilaw-nav-field-bulk-edit-support is already installed','warning');
+		_ilaw_bundle_create_admin_error('iLawyer bundle plugin is activated but advanced-custom-fields-nav-menu-field is already installed','warning');
 	});
 }
 

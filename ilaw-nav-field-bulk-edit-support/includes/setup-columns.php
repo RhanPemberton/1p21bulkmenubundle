@@ -76,11 +76,11 @@ return $field_string;
 add_action('admin_enqueue_scripts',function(){
 $script = <<<'EOT'
 	(function($,qe){
+		console.log(qe);
 		qe.field.add_type( {
 			type: 'nav_menu',
 			initialize: function() {
 				
-				console.log(this);
 				qe.field.View.prototype.initialize.apply(this, arguments),
 				this.$input = this.$("select").prop("readonly", !0)
 			},
