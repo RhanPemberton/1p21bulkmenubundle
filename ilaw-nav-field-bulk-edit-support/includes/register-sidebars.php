@@ -7,7 +7,7 @@ function _ilaw_sm_register_sidebars(){
 	if(function_exists('register_sidebars')){
 
 		$_ilaw_sm_widget_class = get_field('sm_widget_class','option');
-		$_ilaw_sm_title_class = get_field('sm_widget_class','option');
+		$_ilaw_sm_title_class = get_field('sm_title_class','option');
 		$_ilaw_sm_title_tag = (get_field('sm_title_tag','option')) ? get_field('sm_title_tag','option') : 'h3';
 
 		register_sidebar(array(
