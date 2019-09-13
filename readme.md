@@ -1,8 +1,5 @@
 # Documentation
 
-
-
-
 ## Functionalities
 *	Bundle installs [ACF Nav menu fields](https://wordpress.org/plugins/advanced-custom-fields-nav-menu-field/) and [Quick Edit Fields](https://github.com/mcguffin/acf-quick-edit-fields)
 *	sets up a widget area for a default sidebar (for pages)

@@ -12,7 +12,7 @@ function _ilaw_sm_load_acf(){
 		acf_add_local_field_group($_ilaw_sm_opts_fields);
 
 
-		//update json for debug or update via import
+		//get mod dates
 
 		$fields_mod = filemtime(_ILAW_SM_PLUGIN_PATH . '/fields/fields.php');
 		$json_mod = filemtime(_ILAW_SM_PLUGIN_PATH . '/fields/acf-sm-fields.json');

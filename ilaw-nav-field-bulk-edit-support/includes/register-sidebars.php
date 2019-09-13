@@ -95,6 +95,3 @@ add_filter(
 
 	},
 10,4);
-
-
-extract(get_fields('option'));
