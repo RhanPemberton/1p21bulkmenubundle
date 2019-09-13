@@ -36,7 +36,7 @@ register_activation_hook(__FILE__,'_ilaw_sm_activate');
 // ACF NAV menu Field
 if(!class_exists( 'ACF_Nav_Menu_Field_Plugin' ) ){
 	
-	require_once( plugin_dir_path( __FILE__ ) . '/ilaw-nav-field-bulk-edit-support/index.php');
+	require_once( plugin_dir_path( __FILE__ ) . '/advanced-custom-fields-nav-menu-field/fz-acf-nav-menu.php');
 
 }else{
 	add_action('admin_notices',function(){
