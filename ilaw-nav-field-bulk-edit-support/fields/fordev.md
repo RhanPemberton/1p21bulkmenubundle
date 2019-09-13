@@ -38,9 +38,9 @@
 
 	*NOTE: **It is important to comment out the add_action declaration in `includes/register-fields.php`.**  
 	The plugin sets up the same field group in the json file to reduce file setup.  
-	Admin declared field groups cannot exist the same time with plugin declared ones that share the same field keys, **if not this will cause conflicts or corruption to the site's wordpress database** and the fields will no longer be able to save changes*
+	Admin declared field groups cannot exist the same time with plugin declared ones that share the same field keys, **if both are registered this will cause conflicts or corruption to the site's wordpress database** and or the fields will no longer be able to save changes*
 
-	**DO NOT EDIT FIELDS ON A SITE THAT DOES NOT HAVE THE PLUGIN INSTALLED. bundled third party acf plugins add non-native acf properties to allow bulk edit and implement custom nav menu acf type**
+	**DO NOT EDIT FIELDS ON A SITE THAT DOES NOT HAVE THE PLUGIN INSTALLED.* bundled third party acf plugins add non-native acf properties to allow bulk edit and implement custom nav menu acf type*
 
 -	Field groups with names 'iLawyer Sidebars Settings' and 'iLawyer Page Sidebar' will be imported. Edit as needed
 
@@ -48,7 +48,7 @@
 
 -	Check the field group edited and click **Generate PHP**
 
--	Fint `acf_add_local_field_group` and copy the complete array data declared within it
+-	Find `acf_add_local_field_group` and copy the complete array data declared within it
 
 -	Go to ilaw-nav-field-bulk-edit-support/fields/fields.php
 
@@ -60,9 +60,11 @@
 
 	Updating this will update the field groups that the plugin registers for functionalities
 
+-	Go back to Admin > Custom Fields > Field Groups
+
 -	Move the imported and edited field groups to the trash, then go to trash and Delete Permanently both.
 
-	*NOTE: **It is important to delete the admin declared field groups before the next steps** Admin declared field groups cannot exist the same time with plugin declared ones that share the same field keys, **if not this will cause conflicts or corruption to the site's wordpress database** and the fields will no longer be able to save changes*
+	*NOTE: **It is important to delete the admin declared field groups before the next steps** Admin declared field groups cannot exist the same time with plugin declared ones that share the same field keys,  **if both are registered this will cause conflicts or corruption to the site's wordpress database** and the fields will no longer be able to save changes*
 
 -	Save the fields.php file and go to the admin. Refresh that admin
 
