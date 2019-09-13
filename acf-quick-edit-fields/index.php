@@ -40,4 +40,3 @@ if ( is_admin() || wp_doing_ajax() ) {
 
 	Admin\Admin::instance();
 }
-

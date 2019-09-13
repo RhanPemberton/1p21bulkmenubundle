@@ -33,27 +33,27 @@ register_activation_hook(__FILE__,'_ilaw_sm_activate');
 
 
 	
-// ACF NAV menu Field
-if(!class_exists( 'ACF_Nav_Menu_Field_Plugin' ) ){
+// // ACF NAV menu Field
+// if(!class_exists( 'ACF_Nav_Menu_Field_Plugin' ) ){
 	
-	require_once plugin_dir_path( __FILE__ ) . '/advanced-custom-fields-nav-menu-field/fz-acf-nav-menu.php';
+// 	require_once plugin_dir_path( __FILE__ ) . '/advanced-custom-fields-nav-menu-field/fz-acf-nav-menu.php';
 
-}else{
-	add_action('admin_notices',function(){
-		_ilaw_bundle_create_admin_error('iLawyer bundle plugin is activated but advanced-custom-fields-nav-menu-field is already installed','warning');
-	});
-}
+// }else{
+// 	add_action('admin_notices',function(){
+// 		_ilaw_bundle_create_admin_error('iLawyer bundle plugin is activated but advanced-custom-fields-nav-menu-field is already installed','warning');
+// 	});
+// }
 
-//Bulk edit
-if(!function_exists( 'ACFQuickEdit\__autoload' ) ){
-	//Bulk edit
-	require_once plugin_dir_path( __FILE__ ) . '/acf-quick-edit-fields/index.php';
+// //Bulk edit
+// if(!function_exists( 'ACFQuickEdit\__autoload' ) ){
+// 	//Bulk edit
+// 	require_once plugin_dir_path( __FILE__ ) . '/acf-quick-edit-fields/index.php';
 	
-}else{
-	add_action('admin_notices',function(){
-		_ilaw_bundle_create_admin_error('iLawyer bundle plugin is activated but acf-quick-edit-fields is already installed','warning');
-	});
-};
+// }else{
+// 	add_action('admin_notices',function(){
+// 		_ilaw_bundle_create_admin_error('iLawyer bundle plugin is activated but acf-quick-edit-fields is already installed','warning');
+// 	});
+// };
 
 
 require_once plugin_dir_path( __FILE__ ) . '/ilaw-nav-field-bulk-edit-support/index.php';
