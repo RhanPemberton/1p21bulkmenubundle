@@ -3,8 +3,6 @@
 * helpers and shit
 *********************************************************************************************/
 
-
-
 function _ilaw_sm_create_admin_error($message,$notice_type = 'error'){
 		
 	$class = 'notice notice-'.$notice_type;

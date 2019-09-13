@@ -1,5 +1,4 @@
 <?php
-
 //ADD SUPPORT TO NAV FIELD
 add_filter('acf_quick_edit_fields_types',function($types){
 	// add support for table fields. The array key is just the field type...

@@ -18,7 +18,7 @@ function _ilaw_bundle_create_admin_error($message,$notice_type = 'error'){
 
 
 if (!class_exists('ACF')){
-	$message = 'Advanced Custom Fields PRO is not installed. 1Point21 Data Vizualizer needs this plugin to work';
+	$message = 'Advanced Custom Fields PRO is not installed. iLawyer needs this plugin to work';
 
 	_ilaw_bundle_create_admin_error($message);
 }else{

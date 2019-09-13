@@ -1,4 +1,3 @@
-
 <?php
 /*
 Bulk sidebar content template.
