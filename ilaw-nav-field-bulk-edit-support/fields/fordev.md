@@ -7,7 +7,7 @@
 
 *	ilaw-nav-field-bulk-edit-support: https://github.com/samzabala/1p21bulkmenubundle/tree/master/ilaw-nav-field-bulk-edit-support
 *	advanced-custom-fields-nav-menu-field: https://wordpress.org/plugins/advanced-custom-fields-nav-menu-field/
-*	acf-quick-edit-fields-master: https://github.com/mcguffin/acf-quick-edit-fields
+*	acf-quick-edit-fields: https://github.com/mcguffin/acf-quick-edit-fields
 
 ## How to update plugin:
 

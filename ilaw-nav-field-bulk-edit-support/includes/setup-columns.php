@@ -93,7 +93,7 @@ wp_add_inline_script( 'acf-quickedit', $script, 'after');
 //save the changes
 add_action( 'acf_qef_update_nav_menu', function( $value, $object_id, $acf_field ){
 
-    update_field( $acf_field['key'], $value, $object_id );
+update_field( $acf_field['key'], $value, $object_id );
 
 }, 10, 3 );
 
