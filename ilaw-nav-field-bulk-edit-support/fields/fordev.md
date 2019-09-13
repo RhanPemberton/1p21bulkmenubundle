@@ -40,6 +40,8 @@
 	The plugin sets up the same field group in the json file to reduce file setup.  
 	Admin declared field groups cannot exist the same time with plugin declared ones that share the same field keys, **if not this will cause conflicts or corruption to the site's wordpress database** and the fields will no longer be able to save changes*
 
+	**DO NOT EDIT FIELDS ON A SITE THAT DOES NOT HAVE THE PLUGIN INSTALLED. bundled third party acf plugins add non-native properties to allow bulk edit and implement custom nav menu acf type**
+
 -	Field groups with names 'iLawyer Sidebars Settings' and 'iLawyer Page Sidebar' will be imported. Edit as needed
 
 -	After saving changes go to Admin > Custom Fields > Tools > Export

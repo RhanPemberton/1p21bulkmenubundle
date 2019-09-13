@@ -10,10 +10,12 @@
 *	sets up parent page sidebars that will be inherited by descendants
 *	adds ability to set a custom menu to each page via admin bulk edit or edit page
 
-## How to install
+## How to install (the simple way)
 
 1.	Install this boi
-2.	Open theme template(s) in a text editor and replace `get_sidebar()` with `get_bulk_sidebar()`. This will replace the set sidebar.php template
+2.	go to Admin > iLawyer Sidebar Settings > Subdirectory Sidebars and setup appropriate subdirectory sidebars in 
+3.	go to Admin > Appearance > Widgets and setup or migrate contents of blog and default sidebars into the ilawyer setup sidebars
+4.	Open index.php or theme template(s) that utilize sidebars in a text editor and replace `dynamic_sidebar()` declarations with `get_bulk_sidebar()`.
 
 
 ## Render sidebar

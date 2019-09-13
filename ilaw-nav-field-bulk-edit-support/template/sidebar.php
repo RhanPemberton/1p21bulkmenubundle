@@ -1,12 +1,19 @@
 
 <?php
+/*
+Bulk sidebar content template.
+
+If the sidebar needs to be customized, copy this template and set a new template in your theme and paste and modify the code there
+*/
+
 //check for page's own custom sidebar first
 if ( get_field('sm_custom_menu') ){ ?>
 
 	<?php
-	$widget_class = get_field('sm_widget_class','option');
-	$title_class = get_field('sm_title_class','option');
-	$title_tag = (get_field('sm_title_tag','option')) ? get_field('sm_title_tag','option') : 'h3';
+		//get settings
+		$widget_class = get_field('sm_widget_class','option');
+		$title_class = get_field('sm_title_class','option');
+		$title_tag = (get_field('sm_title_tag','option')) ? get_field('sm_title_tag','option') : 'h3';
 	?>
 
 		<!-- custom sidebar -->
@@ -64,7 +71,7 @@ if ( get_field('sm_custom_menu') ){ ?>
 	
 
 	
-	// if it didnt  get any ancestral sidebars just put the defaul boi
+	// if it didnt get any ancestral sidebars just put the default boi
 	if($no_sidebar_yet){
 
 		if( is_active_sidebar( '_ilaw_sm_default_sidebar' ) ){

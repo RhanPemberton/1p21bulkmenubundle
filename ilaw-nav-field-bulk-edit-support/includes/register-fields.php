@@ -126,8 +126,8 @@ add_filter('acf/validate_value/key=field_5cc0984cf5836', '_ilaw_sm_validate_side
 if( function_exists('acf_add_options_page') ) {
  
 	acf_add_options_page(array(
-	  'page_title' 	=> 'iLawyer Global Sidebars',
-	  'menu_title'	=> 'iLawyer Global Sidebars',
+	  'page_title' 	=> 'iLawyer Sidebars Settings',
+	  'menu_title'	=> 'iLawyer Sidebars Settings',
 	  'menu_slug' 	=> 'ilaw-sidebar-options',
 	  'capability'	=> 'edit_posts',
 	  'redirect'	=> false,

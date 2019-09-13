@@ -55,6 +55,9 @@ function _ilaw_sm_slug_text($string) {
 /********************************************************************************************
 * open for the pooblic
 *********************************************************************************************/
-function get_bulk_sidebar(){
-		require_once _ILAW_SM_PLUGIN_PATH . 'template/sidebar.php';
+
+if(!function_exists('get_bulk_sidebar')){
+	function get_bulk_sidebar(){
+			require_once _ILAW_SM_PLUGIN_PATH . 'template/sidebar.php';
+	}
 }
