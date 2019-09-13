@@ -5,57 +5,61 @@
 function _ilaw_sm_register_sidebars(){
 	if(function_exists('register_sidebars')){
 
-		$_ilaw_sm_widget_class = get_field('sm_widget_class','option');
-		$_ilaw_sm_title_class = get_field('sm_title_class','option');
-		$_ilaw_sm_title_tag = (get_field('sm_title_tag','option')) ? get_field('sm_title_tag','option') : 'h3';
 
-		register_sidebar(array(
-			'name'          => 'Blog Sidebar (iLawyer Sidebar)',
-			'id'            => '_ilaw_sm_blog_sidebar',
-			'description'   => 'From the bulk edit bundle plugin',
-			'before_widget' => '<div id="%1$s" class="widget %2$s '.$_ilaw_sm_widget_class.'">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<'.$_ilaw_sm_title_tag.' class="widget-title '.$_ilaw_sm_title_class.'">',
-			'after_title'   => '</'.$_ilaw_sm_title_tag.'>'
-		));
-	
-		register_sidebar(array(
-			'name'          => 'Default Sidebar (iLawyer Sidebar)',
-			'id'            => '_ilaw_sm_default_sidebar',
-			'description'   => 'From the bulk edit bundle plugin',
-			'before_widget' => '<div id="%1$s" class="widget %2$s '.$_ilaw_sm_widget_class.'">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<'.$_ilaw_sm_title_tag.' class="widget-title '.$_ilaw_sm_title_class.'">',
-			'after_title'   => '</'.$_ilaw_sm_title_tag.'>'
-		));
-		$ilaw_set_sidebars = get_field('sm_sidebars','option');
+		if(class_exists('ACF')){
+			$_ilaw_sm_widget_class = get_field('sm_widget_class','option');
+			$_ilaw_sm_title_class = get_field('sm_title_class','option');
+			$_ilaw_sm_title_tag = (get_field('sm_title_tag','option')) ? get_field('sm_title_tag','option') : 'h3';
 
-		//so u dont have to edit the functions anymore everytime a new unique sidebar area is set up :') 
-	
-		if( $ilaw_set_sidebars ){
+			register_sidebar(array(
+				'name'          => 'Blog Sidebar (iLawyer Sidebar)',
+				'id'            => '_ilaw_sm_blog_sidebar',
+				'description'   => 'From the bulk edit bundle plugin',
+				'before_widget' => '<div id="%1$s" class="widget %2$s '.$_ilaw_sm_widget_class.'">',
+				'after_widget'  => '</div>',
+				'before_title'  => '<'.$_ilaw_sm_title_tag.' class="widget-title '.$_ilaw_sm_title_class.'">',
+				'after_title'   => '</'.$_ilaw_sm_title_tag.'>'
+			));
+		
+			register_sidebar(array(
+				'name'          => 'Default Sidebar (iLawyer Sidebar)',
+				'id'            => '_ilaw_sm_default_sidebar',
+				'description'   => 'From the bulk edit bundle plugin',
+				'before_widget' => '<div id="%1$s" class="widget %2$s '.$_ilaw_sm_widget_class.'">',
+				'after_widget'  => '</div>',
+				'before_title'  => '<'.$_ilaw_sm_title_tag.' class="widget-title '.$_ilaw_sm_title_class.'">',
+				'after_title'   => '</'.$_ilaw_sm_title_tag.'>'
+			));
 
-			//Loop through sidebar fields to generate custom sidebars
-			foreach ( $ilaw_set_sidebars as $row ){ 
-				the_row();
-				$s_name = $row[ 'name' ]; //validated to be unique 
-				$s_id = _ilaw_sm_slug_text($s_name);
+			$ilaw_set_sidebars = get_field('sm_sidebars','option');
+
+			//so u dont have to edit the functions anymore everytime a new unique sidebar area is set up :') 
+		
+			if( $ilaw_set_sidebars ){
+
+				//Loop through sidebar fields to generate custom sidebars
+				foreach ( $ilaw_set_sidebars as $row ){ 
+					the_row();
+					$s_name = $row[ 'name' ]; //validated to be unique 
+					$s_id = _ilaw_sm_slug_text($s_name);
+					
+					if($s_id !== '_ilaw_sm_default_sidebar' && $s_id !== '_ilaw_sm_blog_sidebar') {
+						register_sidebar( array(
+							'name' => $s_name. ' (iLawyer Sidebar)',
+							'id' => $s_id,
+							'description'   => 'Added through iLawyer Global > Subdirectory Sidebars',
+							'before_widget' => '<div id="%1$s" class="widget %2$s '.$_ilaw_sm_widget_class.'">',
+							'after_widget'  => '</div>',
+							'before_title'  => '<'.$_ilaw_sm_title_tag.' class="widget-title '.$_ilaw_sm_title_class.'">',
+							'after_title'   => '</'.$_ilaw_sm_title_tag.'>'
+						));
+					}else{
+						echo 'sidebar '.$s_id.' already built in by iLawyer. please remove setup';
+					}
+				};
 				
-				if($s_id !== '_ilaw_sm_default_sidebar' && $s_id !== '_ilaw_sm_blog_sidebar') {
-					register_sidebar( array(
-						'name' => $s_name. ' (iLawyer Sidebar)',
-						'id' => $s_id,
-						'description'   => 'Added through iLawyer Global > Subdirectory Sidebars',
-						'before_widget' => '<div id="%1$s" class="widget %2$s '.$_ilaw_sm_widget_class.'">',
-						'after_widget'  => '</div>',
-						'before_title'  => '<'.$_ilaw_sm_title_tag.' class="widget-title '.$_ilaw_sm_title_class.'">',
-						'after_title'   => '</'.$_ilaw_sm_title_tag.'>'
-					));
-				}else{
-					echo 'sidebar '.$s_id.' already built in by iLawyer. please remove setup';
-				}
 			};
-			
-		};
+		}
 	}
 }
 add_action( 'widgets_init', '_ilaw_sm_register_sidebars' );

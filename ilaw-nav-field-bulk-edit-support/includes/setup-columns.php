@@ -18,7 +18,9 @@ add_filter('acf_quick_edit_fields_types',function($types){
 //and now make them options or select field apear where they need to oh god im gonna need an adult
 
 //display in the column the value
-add_filter('acf_qef_column_html_nav_menu',function( $html, $object_id, $acf_field ) {
+add_filter('acf_qef_column_html_nav_menu','_ilaw_sm_output_value_into_column', 10, 3 );
+
+function _ilaw_sm_output_value_into_column( $html, $object_id, $acf_field ) {
 	$ilaw_set_menu = wp_get_nav_menu_object(get_field( $acf_field['key'], $object_id, false ));
 
 	if($ilaw_set_menu) {
@@ -27,8 +29,7 @@ add_filter('acf_qef_column_html_nav_menu',function( $html, $object_id, $acf_fiel
 	}
 
 
-}, 10, 3 );
-
+}
 
 
 //editable form field or some shit 

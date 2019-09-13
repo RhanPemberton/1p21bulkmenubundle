@@ -9,51 +9,51 @@ Copyright: Yes
 */
 
 function _ilaw_bundle_create_admin_error($message,$notice_type = 'error'){
-		
 	$class = 'notice notice-'.$notice_type;
 	$parsed_message = __( $message );
 	printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), strip_tags( $parsed_message,"<br><pre><code><br/><strong><b><i><em><p><strong>" ) ); 
 }
 
-function _ilaw_sm_check_for_acf(){
-	if (!class_exists('ACF')){
-		$message = 'Advanced Custom Fields PRO is not installed. iLawyer needs this plugin to work';
-	
-		_ilaw_bundle_create_admin_error($message);
-	}
-}
-
-add_action('admin_init','_ilaw_sm_check_for_acf');
-
 function _ilaw_sm_activate(){
-	if(!is_plugin_active( 'advanced-custom-fields-pro/acf.php' ) ){
+
+
+	if(!class_exists( 'ACF' ) ){
 		if(current_user_can( 'activate_plugins' )){
 			wp_die('Advanced Custom Fields PRO is not installed. iLawyer needs this plugin to work <a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
-			// _ilaw_bundle_create_admin_error($message);
 		}
+        deactivate_plugins( plugin_basename( __FILE__ ) );
 	}
+
+
+	//gOOOOOOD
 }
+
 
 register_activation_hook(__FILE__,'_ilaw_sm_activate');
+
+
 	
+// ACF NAV menu Field
+if(!class_exists( 'ACF_Nav_Menu_Field_Plugin' ) ){
+	
+	require_once( plugin_dir_path( __FILE__ ) . '/ilaw-nav-field-bulk-edit-support/index.php');
 
-
-
-
-if(!class_exists('ACF_Nav_Menu_Field_Plugin')){
-	// ACF NAV menu Field
-	require_once plugin_dir_path( __FILE__ ) . '/advanced-custom-fields-nav-menu-field/fz-acf-nav-menu.php';
 }else{
-	_ilaw_bundle_create_admin_error('nav menu acf is already installed','warning');
+	add_action('admin_notices',function(){
+		_ilaw_bundle_create_admin_error('iLawyer bundle plugin is activated but ilaw-nav-field-bulk-edit-support is already installed','warning');
+	});
 }
 
-if(!class_exists('ACFQuickEdit')){
-
+//Bulk edit
+if(!function_exists( 'ACFQuickEdit\__autoload' ) ){
 	//Bulk edit
-	require_once plugin_dir_path( __FILE__ ) . '/acf-quick-edit-fields/index.php';
+	require_once( plugin_dir_path( __FILE__ ) . '/acf-quick-edit-fields/index.php' );
+	
 }else{
-	_ilaw_bundle_create_admin_error('Acf quick edit already installed','warning');
-}
+	add_action('admin_notices',function(){
+		_ilaw_bundle_create_admin_error('iLawyer bundle plugin is activated but acf-quick-edit-fields is already installed','warning');
+	});
+};
 
-// nav acf bulk edit support
-require_once plugin_dir_path( __FILE__ ) . '/ilaw-nav-field-bulk-edit-support/index.php';
+
+require_once( plugin_dir_path( __FILE__ ) . '/ilaw-nav-field-bulk-edit-support/index.php');

@@ -9,7 +9,8 @@
 
 ## How to install (the simple way)
 
-1.	Install this boi
+1.	Install this boi (Note: Make sure ACF QuickEdit Fields and 	
+Advanced Custom Fields: Nav Menu Field is not installed)
 2.	go to *Admin > iLawyer Sidebar Settings > Subdirectory Sidebars* and setup appropriate subdirectory sidebars
 3.	go to *Admin > Appearance > Widgets* and setup or migrate contents of blog and default sidebars into the ilawyer setup sidebars
 4.	Open index.php or theme template(s) that utilize sidebars in a text editor and remove all `dynamic_sidebar()` declarations and place `bulk_sidebar()`.
