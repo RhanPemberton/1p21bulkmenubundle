@@ -1,6 +1,7 @@
 <?php
 //ADD SUPPORT TO NAV FIELD
-add_filter('acf_quick_edit_fields_types',function($types){
+add_filter('acf_quick_edit_fields_types','_ilaw_sm_add_nav_menu_supported_shit');
+function _ilaw_sm_add_nav_menu_supported_shit($types){
 	// add support for table fields. The array key is just the field type...
 	//give field the options where to display
 	$types['nav_menu'] = [ //from the plugin that set the nav acf field type
@@ -9,7 +10,7 @@ add_filter('acf_quick_edit_fields_types',function($types){
 		'bulkedit' => true
 	];
 	return $types;
-});
+}
 
 add_filter( 'acf_quick_edit_sortable_column_nav_menu', function( $sort ){
 	return true;
