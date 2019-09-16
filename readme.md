@@ -21,7 +21,7 @@
 
 
 2.	Install this boi
-3.	go to *Admin > iLawyer Sidebar Settings > Subdirectory Sidebars* and setup appropriate subdirectory sidebars
+3.	go to *Admin > iLawyer Sidebar Settings > Subdirectory Sidebars* and setup appropriate subdirectory sidebars if needed
 4.	go to *Admin > Appearance > Widgets* and setup or migrate contents of blog and default sidebars into the ilawyer setup sidebars
 5.	Open index.php or theme template(s) that utilize sidebars in a text editor and remove all `dynamic_sidebar()` declarations and place `bulk_sidebar()` appropriately. Modify template code as needed as well.
 
