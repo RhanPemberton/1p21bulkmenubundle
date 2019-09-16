@@ -43,6 +43,8 @@
 	Admin declared field groups cannot exist the same time with plugin declared ones that share the same field keys, **if both are registered this will cause conflicts or corruption to the site's wordpress database** and or the fields will no longer be able to save changes*
 
 	**DO NOT EDIT FIELDS ON A SITE THAT DOES NOT HAVE THE PLUGIN INSTALLED.* bundled third party acf plugins add non-native acf properties to allow bulk edit and implement custom nav menu acf type*
+	
+	**Editing the fields without the plugin installed will erase these non-native properties and remove all additional functionalities the bundled plugins provide.**
 
 -	Field groups with names 'iLawyer Sidebars Settings' and 'iLawyer Page Sidebar' will be imported. Edit as needed
 
