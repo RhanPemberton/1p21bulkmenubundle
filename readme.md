@@ -20,8 +20,7 @@
 	- [ ]	*Sidebar Menu ACF Field group* (`'group_5c366a793a9df'`), or any fields or field groups that matches the field keys in this file [ilaw-nav-field-bulk-edit-support/fields/fields.php](ilaw-nav-field-bulk-edit-support/fields/fields.php) **DO NOT** exist in the back-end
 
 
-2.	Install this boi (Note: Make sure ACF QuickEdit Fields and 	
-Advanced Custom Fields: Nav Menu Field is not installed)
+2.	Install this boi
 3.	go to *Admin > iLawyer Sidebar Settings > Subdirectory Sidebars* and setup appropriate subdirectory sidebars
 4.	go to *Admin > Appearance > Widgets* and setup or migrate contents of blog and default sidebars into the ilawyer setup sidebars
 5.	Open index.php or theme template(s) that utilize sidebars in a text editor and remove all `dynamic_sidebar()` declarations and place `bulk_sidebar()` appropriately. Modify template code as needed as well.
