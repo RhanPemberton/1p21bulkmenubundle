@@ -59,7 +59,7 @@ When the plugin is set up, it will register a widget area for pages, blogs, and 
 </aside>
 ```
 
-In case the sidebar needs to be customized, the function calls on a boiler template: [ilaw-nav-field-bulk-edit-support/template/sidebar.php](ilaw-nav-field-bulk-edit-support/template/sidebar.php) which can be copied into your theme instead of using the function
+In case the rendered content needs to be customized, the function calls on a boiler template: [ilaw-nav-field-bulk-edit-support/template/sidebar.php](ilaw-nav-field-bulk-edit-support/template/sidebar.php) which can be copied into your theme instead of using the function
 
 # Version Updates
 *	2.0.0
