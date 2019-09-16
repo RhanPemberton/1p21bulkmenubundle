@@ -47,14 +47,4 @@ class GalleryField extends Field {
 	}
 
 
-	/**
-	 *	@inheritdoc
-	 */
-	public function sanitize_value( $value, $context = 'db' ) {
-		$value = (array) $value;
-		$value = array_map( 'intval', $value );
-		$value = array_filter( $value );
-		return array_values( $value );
-	}
-
 }

@@ -7,7 +7,7 @@ define('_ILAW_SM_PLUGIN_BASENAME',plugin_basename(__FILE__));
 
 
 require_once _ILAW_SM_PLUGIN_PATH . 'includes/helpers.php';
-require_once _ILAW_SM_PLUGIN_PATH . 'includes/register-fields.php';
-require_once _ILAW_SM_PLUGIN_PATH . 'includes/register-sidebars.php';
 
 require_once _ILAW_SM_PLUGIN_PATH . 'includes/setup-columns.php';
+require_once _ILAW_SM_PLUGIN_PATH . 'includes/register-fields.php';
+require_once _ILAW_SM_PLUGIN_PATH . 'includes/register-sidebars.php';

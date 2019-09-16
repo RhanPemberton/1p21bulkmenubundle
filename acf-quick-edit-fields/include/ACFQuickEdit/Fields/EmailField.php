@@ -23,11 +23,4 @@ class EmailField extends Field {
 	}
 
 
-	/**
-	 *	@inheritdoc
-	 */
-	public function sanitize_value( $value, $context = 'db' ) {
-		return sanitize_email( $value );
-	}
-
 }

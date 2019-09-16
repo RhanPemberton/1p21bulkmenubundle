@@ -1,9 +1,4 @@
 <?php
-/**
- *	@package ACFQuickEdit\Core
- *	@version 1.0.0
- *	2018-09-22
- */
 
 namespace ACFQuickEdit\Core;
 
@@ -12,20 +7,20 @@ if ( ! defined('ABSPATH') ) {
 }
 
 
-interface ComponentInterface {
+abstract class PluginComponent extends Singleton {
 
 	/**
-	 *	Called on Plugin activation
+	 *	Called on plugin activation
 	 *
 	 *	@return array(
 	 *		'success'	=> bool,
 	 *		'messages'	=> array,
 	 *	)
 	 */
-	public function activate();
+	abstract function activate();
 
 	/**
-	 *	Called on Plugin upgrade
+	 *	Called on plugin upgrade
 	 *	@param	string	$new_version
 	 *	@param	string	$old_version
 	 *	@return array(
@@ -33,19 +28,19 @@ interface ComponentInterface {
 	 *		'messages'	=> array,
 	 *	)
 	 */
-	public function upgrade( $new_version, $old_version );
+	abstract function upgrade( $new_version, $old_version );
 
 	/**
-	 *	Called on Plugin deactivation
+	 *	Called on plugin deactivation
 	 *	@return array(
 	 *		'success'	=> bool,
 	 *		'messages'	=> array,
 	 *	)
 	 */
-	public function deactivate();
+	abstract function deactivate();
 
 	/**
-	 *	Called on Plugin uninstall
+	 *	Called on plugin uninstall
 	 *	@param	string	$new_version
 	 *	@param	string	$old_version
 	 *	@return array(
@@ -53,6 +48,6 @@ interface ComponentInterface {
 	 *		'messages'	=> array,
 	 *	)
 	 */
-	public static function uninstall();
+	abstract function uninstall();
 
 }

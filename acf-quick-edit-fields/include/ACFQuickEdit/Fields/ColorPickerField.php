@@ -22,7 +22,7 @@ class ColorPickerField extends Field {
 			$value = 'rgba(255,255,255,0)';
 		}
 
-		return sprintf( '<div class="%s" style="background-color:%s"></div>', sanitize_html_class( $indicator_class ), esc_attr( $value ) );
+		return sprintf( '<div class="%s" style="background-color:%s"></div>', $indicator_class, $value );
 
 	}
 
@@ -45,6 +45,5 @@ class ColorPickerField extends Field {
 	public function is_sortable() {
 		return true;
 	}
-
 
 }

@@ -5,8 +5,20 @@ namespace ACFQuickEdit\Fields;
 if ( ! defined( 'ABSPATH' ) )
 	die('Nope.');
 
-class TextareaField extends TextField {
+class TextareaField extends Field {
 
+	/**
+	 *	@inheritdoc
+	 */
+	public function render_column( $object_id ) {
+
+		if ( $value = $this->get_value( $object_id ) ) {
+			return sprintf( '<pre>%s</pre>', $value );
+		}
+
+		return '';
+
+	}
 
 	/**
 	 *	@inheritdoc
@@ -20,19 +32,5 @@ class TextareaField extends TextField {
 
 	}
 
-	/**
-	 *	@inheritdoc
-	 */
-	public function is_sortable() {
-		return false;
-	}
-
-
-	/**
-	 *	@param mixed $value
-	 */
-	public function sanitize_value( $value, $context = 'db' ) {
-		return sanitize_textarea_field( $value );
-	}
 
 }
