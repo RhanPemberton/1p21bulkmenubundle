@@ -72,7 +72,7 @@
 
 -	Save the fields.php file and go to the admin. Refresh that admin
 
-	On refresh, the json file that was used to import the field groups will be updated for future edits
+	On refresh, the json file that was used to import the field groups will be updated for future ready edits
 
 -	Go to `includes/register-fields.php`
 
