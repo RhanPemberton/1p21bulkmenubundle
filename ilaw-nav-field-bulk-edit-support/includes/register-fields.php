@@ -3,6 +3,19 @@
 * setup acf fields
 *********************************************************************************************/
 
+//make a page
+if( function_exists('acf_add_options_page') ) {
+ 
+	acf_add_options_page(array(
+	  'page_title' 	=> __('iLawyer Sidebars Settings'),
+	  'menu_title'	=> __('iLawyer Sidebars Settings'),
+	  'menu_slug' 	=> 'ilaw-sidebar-options',
+	  'capability'	=> 'edit_posts',
+	  'redirect'	=> false,
+	  'icon_url'	=> 'dashicons-menu-alt'
+	));
+}
+
 function _ilaw_sm_load_acf(){
 	if(function_exists('acf_add_local_field_group')){
 		//register them
@@ -121,17 +134,3 @@ function _ilaw_sm_validate_sidebar_name( $valid, $value, $field, $input ) {
 	return $valid;
 }
 add_filter('acf/validate_value/key=field_5cc0984cf5836', '_ilaw_sm_validate_sidebar_name', 20, 4);
-
-
-if( function_exists('acf_add_options_page') ) {
- 
-	acf_add_options_page(array(
-	  'page_title' 	=> 'iLawyer Sidebars Settings',
-	  'menu_title'	=> 'iLawyer Sidebars Settings',
-	  'menu_slug' 	=> 'ilaw-sidebar-options',
-	  'capability'	=> 'edit_posts',
-	  'redirect'	=> false,
-	  'icon_url'	=> 'dashicons-menu-alt'
-	));
-  
-  }
