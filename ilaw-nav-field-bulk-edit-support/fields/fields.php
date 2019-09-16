@@ -3,7 +3,7 @@
 /********************************************************************************************
 * SUBDIRECTORY / SETTINGS FIELDS
 DO NOT EDIT THE acf-sm-fields.json FILE
-read fordev.md if you think you are ThatBitch(TM)
+read fordev.md if you think you are ThatBitch(TM) and you need to edit the fields
 *********************************************************************************************/
 
 $_ilaw_sm_opts_fields = array(
