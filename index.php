@@ -14,22 +14,17 @@ function _ilaw_bundle_create_admin_error($message,$notice_type = 'error'){
 	printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), strip_tags( $parsed_message,"<br><pre><code><br/><strong><b><i><em><p><strong>" ) ); 
 }
 
-function _ilaw_sm_activate(){
-
-
+function _ilaw_sm_check_for_acf(){
 	if(!class_exists( 'ACF' ) ){
 		if(current_user_can( 'activate_plugins' )){
 			wp_die('Advanced Custom Fields PRO is not installed. iLawyer needs this plugin to work <a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
 		}
         deactivate_plugins( plugin_basename( __FILE__ ) );
 	}
-
-
-	//gOOOOOOD
 }
 
 
-register_activation_hook(__FILE__,'_ilaw_sm_activate');
+register_activation_hook(__FILE__,'_ilaw_sm_check_for_acf');
 
 
 	
@@ -40,7 +35,7 @@ if(!class_exists( 'ACF_Nav_Menu_Field_Plugin' ) ){
 
 }else{
 	add_action('admin_notices',function(){
-		_ilaw_bundle_create_admin_error('iLawyer bundle plugin is activated but advanced-custom-fields-nav-menu-field is already installed','warning');
+		_ilaw_bundle_create_admin_error('iLawyer bundle plugin is activated but advanced-custom-fields-nav-menu-field is already installed','warning is-dismissable');
 	});
 }
 
@@ -51,7 +46,7 @@ if(!function_exists( 'ACFQuickEdit\__autoload' ) ){
 	
 }else{
 	add_action('admin_notices',function(){
-		_ilaw_bundle_create_admin_error('iLawyer bundle plugin is activated but acf-quick-edit-fields is already installed','warning');
+		_ilaw_bundle_create_admin_error('iLawyer bundle plugin is activated but acf-quick-edit-fields is already installed.  As of 2019, if version is greater than 2.4.19, it is strongly recommended to uninstall','error is-dismissable');
 	});
 };
 
