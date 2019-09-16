@@ -13,9 +13,9 @@
 
 1.	Check and make sure the following tasks are true for a smooth install
 
-	- [ ] *Advanced Custom Fields: Nav Menu Field* plugin is **NOT** activated (or make sure its at version 2.0.0)
+	- [ ] *Advanced Custom Fields: Nav Menu Field* plugin is **NOT** activated (or make sure it's at version 2.0.0)
 
-	- [ ] *ACF QuickEdit Fields* plugin is **NOT** activated (or make sure its at version 2.4.19)
+	- [ ] *ACF QuickEdit Fields* plugin is **NOT** activated (or make sure it's at version 2.4.19)
 
 	- [ ]	*Sidebar Menu ACF Field group* (`'group_5c366a793a9df'`), or any fields or field groups that matches the field keys in this file [ilaw-nav-field-bulk-edit-support/fields/fields.php](ilaw-nav-field-bulk-edit-support/fields/fields.php) **DO NOT** exist in the back-end
 
