@@ -21,6 +21,8 @@
 
 	If the plugin no longer has an index.php, you are dead.
 
+-	Test the plugin on a clone environment of an existing iLawyer site, and a new install wordpress site, make sure shit's not broken
+
 -	Update repo because duh
 
 
@@ -73,5 +75,7 @@
 -	Go to `includes/register-fields.php`
 
 -	Find add_action and undo commenting
+
+-	Test the plugin on a clone environment of an existing iLawyer site, and a new install wordpress site, make sure shit's not broken
 
 -	Push to repo because duh
