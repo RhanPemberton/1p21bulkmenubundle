@@ -19,7 +19,7 @@
 
 -	Remove Plugin header comments on each referrenced files in index.php so it doesnt break the site
 
-	If the plugin no longer has an index.php, you are dead.
+	Note: If the plugin no longer has an index.php, you are dead. Abort and leave it alone now you can no longer save it.
 
 -	Test the plugin on a clone environment of an existing iLawyer site, and a new install wordpress site, make sure shit's not broken
 
