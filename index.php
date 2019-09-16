@@ -46,7 +46,7 @@ if(!function_exists( 'ACFQuickEdit\__autoload' ) ){
 	
 }else{
 	add_action('admin_notices',function(){
-		_ilaw_bundle_create_admin_error('iLawyer bundle plugin is activated but acf-quick-edit-fields is already installed.  As of 2019, if version is greater than 2.4.19, it is strongly recommended to uninstall','error is-dismissable');
+		_ilaw_bundle_create_admin_error('iLawyer bundle plugin is activated but acf-quick-edit-fields is already installed.  As of 2019, if acf-quick-edit-fields version is greater than 2.4.19, it is strongly recommended to uninstall','error is-dismissable');
 	});
 };
 
