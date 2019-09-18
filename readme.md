@@ -62,7 +62,7 @@ In case the rendered content needs to be customized, the function calls on a boi
 
 
 
-## Functions ased from `bulk_sidebar`
+## Functions aside from `bulk_sidebar`
 
 ### `bulk_get_default()`
 
