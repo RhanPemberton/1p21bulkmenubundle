@@ -73,6 +73,7 @@ add_filter(
 		
 		$ilawyer_sidebars = array();
 		$ilaw_set_sidebars = get_field('sm_sidebars','option');
+		$_ilaw_sm_menu_depth = (get_field('sm_depth','option') )? get_field('sm_depth','option') : 0;
 
 		if( $ilaw_set_sidebars ){
 
@@ -83,19 +84,14 @@ add_filter(
 				);
 			}
 		}
-			
 		
 		if(
 			in_array($args['id'],$ilawyer_sidebars)
 			|| $args['id'] == '_ilaw_sm_default_sidebar'
 			|| $args['id'] == '_ilaw_sm_blog_sidebar'
 		){
-			$nav_menu_args['depth'] = get_field('sm_depth','option');
-			$nav_menu_args['depth'] = 2;
-
+			$nav_menu_args['depth'] = $_ilaw_sm_menu_depth;
 		}
-		
 		return $nav_menu_args;
-
 	},
 10,4);
