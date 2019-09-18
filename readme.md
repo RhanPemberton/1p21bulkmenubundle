@@ -62,11 +62,15 @@ In case the rendered content needs to be customized, the function calls on a boi
 
 
 
-##Functions ased from `bulk_sidebar`
+## Functions ased from `bulk_sidebar`
 
 ### `bulk_get_default()`
 
 Get default fallbacks for opts fields in case they are blank or not flushed
+
+## Back end fields
+
+good luck
 
 # Version Updates
 
