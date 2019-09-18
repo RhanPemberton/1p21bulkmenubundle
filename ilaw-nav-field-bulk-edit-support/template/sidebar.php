@@ -32,7 +32,7 @@ if ( get_field('sm_custom_menu') ){ ?>
 				wp_nav_menu(array(
 					'menu' => get_field('sm_custom_menu'),
 					'container' => 'ul',
-					'depth' => get_field('sm_depth','option')
+					'depth' => get_field('sm_depth','option') ? get_field('sm_depth','option') : 0
 				));
 			?>
 		</div>
