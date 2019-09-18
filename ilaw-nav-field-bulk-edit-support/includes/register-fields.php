@@ -22,7 +22,7 @@ add_action( 'plugins_loaded', '_ilaw_sm_make_opt_page' );
 function _ilaw_sm_load_acf(){
 	if(function_exists('acf_add_local_field_group')){
 		//register them
-		require _ILAW_SM_PLUGIN_PATH . '/fields/fields.php';
+		include_once _ILAW_SM_PLUGIN_PATH . '/fields/fields.php';
 
 		acf_add_local_field_group($_ilaw_sm_page_fields);
 		acf_add_local_field_group($_ilaw_sm_opts_fields);
@@ -78,7 +78,7 @@ add_action('acf/init', '_ilaw_sm_load_acf');
 
 
 //sidebar name validation
-function _ilaw_sm_validate_sidebar_name( $valid, $value, $field, $input ) {
+function _ilaw_sm_validate_unique_repeater( $valid, $value, $field, $input ) {
 	// bail early if value is already invalid
 	if( !$valid ) {
 		return $valid;
@@ -136,4 +136,4 @@ function _ilaw_sm_validate_sidebar_name( $valid, $value, $field, $input ) {
 	// return
 	return $valid;
 }
-add_filter('acf/validate_value/key=field_5cc0984cf5836', '_ilaw_sm_validate_sidebar_name', 20, 4);
+add_filter('acf/validate_value/key=field_5cc0984cf5836', '_ilaw_sm_validate_unique_repeater', 20, 4);

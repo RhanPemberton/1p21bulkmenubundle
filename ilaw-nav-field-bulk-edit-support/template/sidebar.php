@@ -12,9 +12,9 @@ if ( get_field('sm_custom_menu') ){ ?>
 		//get options settings
 		$widget_class = get_field('sm_widget_class','option');
 		$title_class = get_field('sm_title_class','option');
-		$title_tag = (get_field('sm_title_tag','option')) ? get_field('sm_title_tag','option') : 'h3';
-		$menu_depth = (get_field('sm_depth','option') ) ? get_field('sm_depth','option') : 0;
-		$default_title = ( the_field('sm_default_title','option') ) ?  the_field('sm_default_title','option') : 'Useful Links';
+		$title_tag = (get_field('sm_title_tag','option')) ? get_field('sm_title_tag','option') : bulk_get_default('title_tag');
+		$menu_depth = (get_field('sm_depth','option') ) ? get_field('sm_depth','option') : bulk_get_default('menu_depth');
+		$default_title = ( the_field('sm_default_title','option') ) ?  the_field('sm_default_title','option') : bulk_get_default('default_title');
 	?>
 
 		<!-- custom sidebar -->
@@ -99,18 +99,3 @@ if ( get_field('sm_custom_menu') ){ ?>
 		dynamic_sidebar( '_ilaw_sm_default_sidebar' );
 	}
 }
-
-
-include _ILAW_SM_PLUGIN_PATH . '/fields/fields.php';
-$ilaw_boi_groups = acf_get_local_field_groups(
-	
-	array(
-		$_ilaw_sm_page_fields['key'],
-		$_ilaw_sm_opts_fields['key'],
-		'group_666666666666'
-	)
-); //taken from files mentioned above
-
-echo '<pre>';
-print_r($ilaw_boi_groups);
-echo '</pre>';

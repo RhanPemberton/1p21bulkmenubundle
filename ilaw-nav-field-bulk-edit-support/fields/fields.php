@@ -111,7 +111,7 @@ $_ilaw_sm_opts_fields = array(
 				'class' => '',
 				'id' => '',
 			),
-			'default_value' => 'Practice Areas',
+			'default_value' => 'Useful Links',
 			'placeholder' => '',
 			'prepend' => '',
 			'append' => '',

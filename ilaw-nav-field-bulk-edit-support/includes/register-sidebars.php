@@ -9,7 +9,7 @@ function _ilaw_sm_register_sidebars(){
 		if(class_exists('ACF')){
 			$_ilaw_sm_widget_class = get_field('sm_widget_class','option');
 			$_ilaw_sm_title_class = get_field('sm_title_class','option');
-			$_ilaw_sm_title_tag = (get_field('sm_title_tag','option')) ? get_field('sm_title_tag','option') : 'h3';
+			$_ilaw_sm_title_tag = (get_field('sm_title_tag','option')) ? get_field('sm_title_tag','option') : bulk_get_default('title_tag');
 
 			register_sidebar(array(
 				'name'          => 'Blog Sidebar (iLawyer Sidebar)',
@@ -71,22 +71,22 @@ add_filter(
 	function( $nav_menu_args, $nav_menu, $args, $instance ){
 
 		
-		$ilawyer_sidebars = array();
+		$ilaw_valid_sidebar_ids = array();
 		$ilaw_set_sidebars = get_field('sm_sidebars','option');
-		$_ilaw_sm_menu_depth = (get_field('sm_depth','option') )? get_field('sm_depth','option') : 0;
+		$_ilaw_sm_menu_depth = (get_field('sm_depth','option') )? get_field('sm_depth','option') : bulk_get_default('menu_depth');
 
 		if( $ilaw_set_sidebars ){
 
 			foreach($ilaw_set_sidebars as $row){
 				array_push(
-					$ilawyer_sidebars,
+					$ilaw_valid_sidebar_ids,
 					_ilaw_sm_slug_text( $row['name'] )
 				);
 			}
 		}
 		
 		if(
-			in_array($args['id'],$ilawyer_sidebars)
+			in_array($args['id'],$ilaw_valid_sidebar_ids)
 			|| $args['id'] == '_ilaw_sm_default_sidebar'
 			|| $args['id'] == '_ilaw_sm_blog_sidebar'
 		){

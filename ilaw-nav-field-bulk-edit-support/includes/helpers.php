@@ -53,11 +53,22 @@ function _ilaw_sm_slug_text($string) {
 /********************************************************************************************
 * open for the pooblic
 *********************************************************************************************/
-
+//duh
 if(!function_exists('bulk_sidebar')){
 	function bulk_sidebar(){
 		if(class_exists('ACF')){
 			require_once _ILAW_SM_PLUGIN_PATH . 'template/sidebar.php';
 		}
+	}
+}
+
+//defaults arent really registered in the database unless you like... flush the pages were the field groups at. fuck you acf. imma still use u tho <3
+if(!function_exists('get_bulk_default')){
+	function bulk_get_default($slug = ''){
+		
+		$defaults = $GLOBALS['_ilaw']['defaults'];
+
+	if(isset($defaults[$slug]))
+		return $defaults[$slug];
 	}
 }

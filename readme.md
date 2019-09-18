@@ -60,7 +60,20 @@ When the plugin is set up, it will register a widget area for pages, blogs, and 
 
 In case the rendered content needs to be customized, the function calls on a boiler template: [ilaw-nav-field-bulk-edit-support/template/sidebar.php](ilaw-nav-field-bulk-edit-support/template/sidebar.php) which can be copied into your theme instead of using the function
 
+
+
+##Functions ased from `bulk_sidebar`
+
+### `bulk_get_default()`
+
+Get default fallbacks for opts fields in case they are blank or not flushed
+
 # Version Updates
+
+*	2.0.2
+	- o wait there's more bugs hahaha wow my butthole is sad but at least it fixed
+*	2.0.1
+	- depth was not working. fixed
 *	2.0.0
 	- easier set up and stuff
 	- updated quick fields again to 3.0.1.
