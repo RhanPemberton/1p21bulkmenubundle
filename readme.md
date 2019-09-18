@@ -126,6 +126,8 @@ These fields are used to add widget areas to pages and all their descendants. Th
 
 # Version Updates
 
+*	2.0.3
+	- hold my fuck i messed up the blog sidebar
 *	2.0.2
 	- o wait there's more bugs hahaha wow my butthole is sad but at least it fixed
 *	2.0.1
