@@ -22,8 +22,10 @@ if ( get_field('sm_custom_menu') ){ ?>
 				
 				<?php if(get_field('sm_custom_title')){
 					the_field('sm_custom_title');
-				}else{
+				}else if ( the_field('sm_default_title','option') ){
 					the_field('sm_default_title','option');
+				}else{ //ACF doesnt somehow get the default set value for the acf value when the options page is not flushed like permalinks. output a basic ass bitch title
+					echo 'Useful Links';
 				} ?>
 			
 			</<?=$title_tag; ?>>
