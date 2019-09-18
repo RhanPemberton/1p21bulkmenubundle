@@ -63,17 +63,17 @@ In case the rendered content needs to be customized, the function calls on a boi
 
 
 
-# Functions aside from `bulk_sidebar`
+## Functions aside from `bulk_sidebar`
 
-## `bulk_get_default()`
+### `bulk_get_default()`
 
 Get default fallbacks for opts fields in case they are blank or not flushed
 
-# Back end fields
+## Back end fields
 
-## iLawyer Sidebar Settings
+### iLawyer Sidebar Settings
 
-### Settings
+#### Settings
 
 *	**Widget Class**
 
@@ -95,7 +95,7 @@ Get default fallbacks for opts fields in case they are blank or not flushed
 
 	number of sub levels for menus. used for [`wp_nav_menu`](https://developer.wordpress.org/reference/functions/wp_nav_menu/) `depth` args
 
-### Subdirectory Sidebars
+#### Subdirectory Sidebars
 
 These fields are used to add widget areas to pages and all their descendants. This will not display if the page has its own custom menu tho
 
@@ -107,11 +107,13 @@ These fields are used to add widget areas to pages and all their descendants. Th
 
 	List of pages that will default to the sidebar including its descendants
 
-## Page Settings
+### Page Settings
 
 *	**Sidebar Title**
 
-	Duh. Will default to **Default Title** if empty. Will not output if **Sidebar Menu** is not set
+	Duh. Will default to **Default Title** if empty.
+	
+	Will not output if **Sidebar Menu** is not set
 
 *	**Sidebar Menu**
 
