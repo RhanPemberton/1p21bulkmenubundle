@@ -4,7 +4,6 @@ Bulk sidebar content template.
 
 If the sidebar needs to be customized, copy this template and set a new template in your theme and paste and modify the code there
 */
-
 //check for page's own custom sidebar first
 if ( get_field('sm_custom_menu') ){ ?>
 
@@ -40,8 +39,16 @@ if ( get_field('sm_custom_menu') ){ ?>
 		</div>
 	<?php
 
+//then check for blog and posts
+}else if( is_home() || is_single() || (is_archive() && !is_post_type_archive()) ) { 
+
+	if( is_active_sidebar( '_ilaw_sm_blog_sidebar' ) ){
+		echo '<!-- blog sidebar -->';
+		dynamic_sidebar( '_ilaw_sm_blog_sidebar' );
+	}
+
 //check for subdirectory or ancestral sidebars
-}else if( get_field('sm_sidebars','option') ){
+}else  if( get_field('sm_sidebars','option') ){
 
 	$available_sidebars = get_field('sm_sidebars','option');
 
@@ -83,15 +90,6 @@ if ( get_field('sm_custom_menu') ){ ?>
 
 	}
 
-//then check for blog first
-}else if( is_home() || is_single() || is_archive() ) { 
-
-	if( is_active_sidebar( '_ilaw_sm_blog_sidebar' ) ){
-		echo '<!-- blog sidebar -->';
-		dynamic_sidebar( '_ilaw_sm_blog_sidebar' );
-	}
-
-//default boiii
 }else{
 	
 	if( is_active_sidebar( '_ilaw_sm_default_sidebar' ) ){
