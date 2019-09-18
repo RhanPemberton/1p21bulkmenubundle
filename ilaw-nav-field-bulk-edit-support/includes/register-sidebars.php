@@ -91,6 +91,7 @@ add_filter(
 			|| $args['id'] == '_ilaw_sm_blog_sidebar'
 		){
 			$nav_menu_args['depth'] = $_ilaw_sm_menu_depth;
+			$nav_menu_args['container'] = 'ul';
 		}
 		return $nav_menu_args;
 	},
